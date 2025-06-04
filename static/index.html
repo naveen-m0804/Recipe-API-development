@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Recipe App</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Recipe App</h1>
+
+    <div class="filters">
+      <!-- Field-level filters -->
+      <input type="text" id="filterTitle" placeholder="Filter by Title" />
+      <input type="text" id="filterCuisine" placeholder="Filter by Cuisine" />
+      <input type="text" id="filterRating" placeholder="Filter by Rating" />
+      <input type="text" id="filterTotalTime" placeholder="Filter by Total Time" />
+      <input type="text" id="filterServes" placeholder="Filter by Serves" />
+
+      <!-- Pagination controls -->
+      <div class="pagination-controls">
+        <button id="prevPage">Previous</button>
+        <span id="currentPage">1</span>
+        <button id="nextPage">Next</button>
+      </div>
+
+      <!-- Results per page -->
+      <input type="number" id="limit" placeholder="Results per page" min="1" max="50" value="50" />
+      
+
+      <button id="applyFilters">Apply Filters</button>
+      <button id="resetFilters">Reset</button>
+    </div>
+
+    <div id="recipeList"></div>
+  </div>
+
+  <!-- Detail Drawer -->
+  <div id="detailDrawer" class="drawer hidden">
+    <div class="drawer-header">
+      <h2 id="drawerTitle"></h2>
+      <button id="drawerCloseBtn">&times;</button>
+    </div>
+    <div class="drawer-content">
+      <p><strong>Description:</strong> <span id="drawerDescription"></span></p>
+
+      <div class="expandable-section">
+        <div class="expand-header" id="totalTimeHeader" tabindex="0" role="button" aria-expanded="false" aria-controls="expandContent">
+          <strong>Total Time:</strong> <span id="drawerTotalTime"></span>
+          <button id="expandToggle" aria-label="Expand/Collapse">&#x25BC;</button>
+        </div>
+        <div class="expand-content hidden" id="expandContent">
+          <p><strong>Cook Time:</strong> <span id="drawerCookTime"></span></p>
+          <p><strong>Prep Time:</strong> <span id="drawerPrepTime"></span></p>
+        </div>
+      </div>
+
+      <section class="nutrition-section">
+        <h3>Nutrition</h3>
+        <table id="nutritionTable">
+          <thead>
+            <tr><th>Nutrient</th><th>Value</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </div>
+  </div>
+  <div id="drawerOverlay" class="drawer-overlay hidden"></div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

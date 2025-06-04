@@ -1,0 +1,235 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.filters input, .filters select, .filters button {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.filters button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filters button:hover {
+  background: #45a049;
+}
+
+#resetFilters {
+  background: #f44336;
+}
+
+#resetFilters:hover {
+  background: #d32f2f;
+}
+
+/* Pagination Controls */
+.pagination-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 10px;
+  font-weight: bold;
+  font-size: 16px;
+  min-width: 90px;
+  justify-content: center;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fafafa;
+  user-select: none;
+}
+
+.pagination-controls button {
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid #4CAF50;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-controls button:hover {
+  background-color: #45a049;
+}
+
+#currentPage {
+  min-width: 24px;
+  text-align: center;
+  display: inline-block;
+}
+
+/* Recipe Table Styles */
+.recipe-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.recipe-table th, .recipe-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.recipe-table th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.recipe-table tr:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+/* Truncate long titles */
+.truncate {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Drawer Styles */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 350px;
+  height: 100%;
+  background: white;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+  padding: 20px;
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+  transform: translateX(100%);
+  z-index: 1000;
+}
+
+.drawer.visible {
+  transform: translateX(0);
+}
+
+.drawer.hidden {
+  transform: translateX(100%);
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 15px;
+}
+
+.drawer-header h2 {
+  margin: 0;
+  font-size: 1.4em;
+}
+
+#drawerCloseBtn {
+  background: none;
+  border: none;
+  font-size: 1.8em;
+  cursor: pointer;
+}
+
+.drawer-overlay {
+  position: fixed;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(0,0,0,0.3);
+  z-index: 900;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.drawer-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.expandable-section {
+  margin-top: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.expand-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  background: #f7f7f7;
+  user-select: none;
+}
+
+.expand-content {
+  padding: 8px 12px;
+}
+
+.expand-content.hidden {
+  display: none;
+}
+
+.nutrition-section {
+  margin-top: 20px;
+}
+
+.nutrition-section table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.nutrition-section th, .nutrition-section td {
+  border: 1px solid #ddd;
+  padding: 6px 8px;
+  text-align: left;
+}
+
+/* Fallback message */
+.fallback-message {
+  text-align: center;
+  font-size: 1.2em;
+  color: #666;
+  margin-top: 40px;
+}
+
+#limit {
+  width: 80px;
+}
