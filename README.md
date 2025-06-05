@@ -12,13 +12,12 @@ This project is a web-based recipe application that allows users to:
 
 The application consists of a Flask backend (serving a RESTful API and the frontend) and a modern, responsive frontend. The SQLite database (`recipes.db`) contains 8,451 recipe entries.
 
----
+
 
 ## Project Structure
+![Folder structure](https://github.com/user-attachments/assets/d3718809-abad-4eec-9b68-b98de016f1d7)
 
-*(Details about the project folder structure can be added here if available)*
 
----
 
 ## Key Points on Converting JSON to SQLite Database
 
@@ -133,6 +132,14 @@ GET http://localhost:5000/api/recipes?page=2\&limit=5
 ```
 
 ---
+
+## Output
+
+### Testing API using POSTMAN
+![fecting all recipes](https://github.com/user-attachments/assets/70f09027-7869-4c32-a92e-bd53b27729ff)
+![fetching by title](https://github.com/user-attachments/assets/ecf299c4-6559-401e-80cd-ec0d229cd18c)
+![fetching by cuisine](https://github.com/user-attachments/assets/20239a43-a023-4313-a9dc-6f8a2bd89283)
+![page and limiting](https://github.com/user-attachments/assets/447b7a74-76d2-4ec9-b4e5-bb3e581033a8)
 
 ## Conclusion
 
