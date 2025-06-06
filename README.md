@@ -1168,6 +1168,21 @@ GET http://localhost:5000/api/recipes?page=2\&limit=5
 ![fetching by cuisine](https://github.com/user-attachments/assets/20239a43-a023-4313-a9dc-6f8a2bd89283)
 ![page and limiting](https://github.com/user-attachments/assets/447b7a74-76d2-4ec9-b4e5-bb3e581033a8)
 
+
+### Frontend UI/UX
+- All recipe items
+  ![All recipe items](https://github.com/user-attachments/assets/fa2dc8d7-2823-4df5-94f3-6c33a0b13dde)
+
+- Title filter applied
+  ![Title filter applied](https://github.com/user-attachments/assets/195c4069-f653-43f7-ad75-08882f08a5fa)
+
+- All filter applied
+  ![All filter applied](https://github.com/user-attachments/assets/1f918c17-fa76-4a02-80da-93caf6c08b31)
+
+- Detail of particular recipe
+  ![Detail of particular recipe](https://github.com/user-attachments/assets/ca522861-280b-4c79-85cf-d0069b2192e2)
+
+
 ## Conclusion
 
 ### Backend
