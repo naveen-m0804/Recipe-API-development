@@ -86,12 +86,12 @@ How does Flask help us do that?
 Let's break down the core ideas behind creating a simple Flask server:
 
 1.  **The Flask Application Instance:** This is like creating the "main office" itself. You need an object that represents your web application.
-2.  **Routes:** These are like the different "departments" or "service windows" in the office. A route tells the Flask application which piece of code should run when a specific web address (URL path) is requested. For example, `/` is the route for the main page, and `/api/recipes` is a route for getting recipe data (we'll cover [Backend API Endpoints](02_backend_api_endpoints_.md) later).
+2.  **Routes:** These are like the different "departments" or "service windows" in the office. A route tells the Flask application which piece of code should run when a specific web address (URL path) is requested. For example, `/` is the route for the main page, and `/api/recipes` is a route for getting recipe data (we'll cover 02_backend_api_endpoints_.md later).
 3.  **Request Handling Functions:** These are the "workers" in each department. When a request comes in for a specific route, Flask runs the Python function associated with that route. This function does the work (like finding a file or querying the database).
 4.  **Responses:** This is what the worker sends back to the customer. The request handling function returns something (like HTML text, data in JSON format, or a file) that Flask packages up and sends back to the user's browser.
 5.  **Running the Server:** This is like opening the office for business. You need to tell Flask to start listening for incoming requests on a specific address and port (like `localhost:5000`).
 
-[Next Chapter: Backend API Endpoints](02_backend_api_endpoints_.md)
+
 
 
 # Chapter 2: Backend API Endpoints
@@ -194,7 +194,7 @@ Now, how does the `get_all_recipes` function *get* the recipes and *return* them
 Inside the function that handles an API endpoint request, we typically perform the following steps:
 
 1.  **Get any necessary information from the request:** This might include data sent in the request body (for `POST`/`PUT`), parameters in the URL path (like `<title>` in `/api/recipes/title/<title>`), or parameters in the URL query string (like `?page=1&limit=10`).
-2.  **Perform the required logic:** For a `GET` request, this means fetching data, usually from a database. For other methods, it could be saving data, updating records, etc. (The details of database interaction are covered in [SQLite Recipe Database](04_sqlite_recipe_database_.md) and [Database Access Layer](05_database_access_layer_.md)).
+2.  **Perform the required logic:** For a `GET` request, this means fetching data, usually from a database. For other methods, it could be saving data, updating records, etc. (The details of database interaction are covered in SQLite Recipe Database. and Database Access Layer.
 3.  **Prepare the response data:** Gather the data retrieved in step 2 into a Python structure like a list of dictionaries.
 4.  **Convert and return the data:** Use `jsonify()` to convert the Python data structure into a JSON response and return it.
 
@@ -263,10 +263,10 @@ def get_all_recipes():
 ```
 
 -   `@app.route('/api/recipes', methods=['GET'])`: Again, this maps `GET /api/recipes` requests to `get_all_recipes`.
--   `request.args.get('page', 1)` and `request.args.get('limit', 10)`: The `request` object (imported from `flask`) holds information about the incoming request. `request.args` is a dictionary-like object containing parameters from the URL query string (like `?page=2&limit=5`). `.get('page', 1)` safely retrieves the value for `page` (or returns `1` if not provided) and converts it to an integer. This is how we handle [Pagination Logic](08_pagination_logic_.md), which will be discussed in more detail later.
--   `conn = get_db_connection()`: This line calls a function to connect to our database. The specifics of this are covered in [Database Access Layer](05_database_access_layer_.md).
--   `cursor.execute(...)` and `cursor.fetchall()`: These are database operations to run an SQL query and get the results. We'll cover the database setup and queries in [SQLite Recipe Database](04_sqlite_database_.md) and [Database Access Layer](05_database_access_layer_.md).
--   `json.loads(...)`: The recipe data includes lists (like ingredients) and nested objects (like nutrients) that were stored in the database as text strings containing JSON. We need to convert these strings back into Python lists/dictionaries using `json.loads()` before sending them in the JSON response. This process is called **deserialization** and is covered in [Data Serialization/Deserialization](06_data_serialization_deserialization_.md).
+-   `request.args.get('page', 1)` and `request.args.get('limit', 10)`: The `request` object (imported from `flask`) holds information about the incoming request. `request.args` is a dictionary-like object containing parameters from the URL query string (like `?page=2&limit=5`). `.get('page', 1)` safely retrieves the value for `page` (or returns `1` if not provided) and converts it to an integer. 
+-   `conn = get_db_connection()`: This line calls a function to connect to our database. The specifics of this are covered in Database Access Layer.
+-   `cursor.execute(...)` and `cursor.fetchall()`: These are database operations to run an SQL query and get the results. 
+-   `json.loads(...)`: The recipe data includes lists (like ingredients) and nested objects (like nutrients) that were stored in the database as text strings containing JSON. We need to convert these strings back into Python lists/dictionaries using `json.loads()` before sending them in the JSON response. T
 -   `return jsonify(result)`: The final step, sending the list of recipe dictionaries back as a JSON response.
 
 Next, let's look at the `/api/recipes/search` endpoint:
@@ -325,7 +325,7 @@ def search_recipes():
 
 -   `@app.route('/api/recipes/search', methods=['GET'])`: This maps `GET /api/recipes/search` requests to the `search_recipes` function.
 -   `request.args.get('title', default=None, type=str)`: Again, we use `request.args` to get query parameters like `?title=pie` or `?cuisine=Italian`. `default=None` means if the parameter isn't provided, the variable will be `None`. `type=str` ensures it's treated as a string.
--   The code then dynamically builds an SQL query (`query`) and a list of values (`params`) based on which parameters were provided in the request. This is part of the [Search and Filtering Logic](07_search_and_filtering_logic_.md).
+-   The code then dynamically builds an SQL query (`query`) and a list of values (`params`) based on which parameters were provided in the request. 
 -   The database interaction and JSON deserialization steps are similar to `get_all_recipes`.
 
 We also have endpoints like `/api/recipes/title/<title>` and `/api/recipes/cuisine` which work similarly but might get parameters differently (`<title>` is a path parameter, `cuisine` is a query parameter in this specific route) and execute different database queries. You can see their definitions in `app.py`.
@@ -339,7 +339,7 @@ Understanding these endpoints is crucial because they form the communication con
 
 # Chapter 3: Frontend User Interface
 
-Welcome back! In the previous chapters, we built the foundation of our backend application. In [Chapter 1: Flask Web Server](01_flask_web_server_.md), we learned how our Flask server listens for requests and serves files like `index.html`. Then, in Chapter 2: Backend API Endpoints, we saw how the backend provides specific "doors" (`/api/recipes`, `/api/recipes/search`) that other applications can use to get data, usually in JSON format.
+Welcome back! In the previous chapters, we built the foundation of our backend application. In Chapter 1: Flask Web Server, we learned how our Flask server listens for requests and serves files like `index.html`. Then, in Chapter 2: Backend API Endpoints, we saw how the backend provides specific "doors" (`/api/recipes`, `/api/recipes/search`) that other applications can use to get data, usually in JSON format.
 
 But where does all this happen? How do *you*, the user, actually see the recipes, type in your search terms, and click buttons? This is the job of the **Frontend User Interface**.
 
@@ -362,19 +362,19 @@ Our goal in this chapter is to understand how these pieces work together to show
 
 ## How the Frontend Gets Recipes
 
-The core task of our frontend is to display recipes. Since the backend is the source of truth for recipe data, the frontend needs to ask the backend for it. This is where the [Backend API Endpoints](02_backend_api_endpoints_.md) we discussed come into play.
+The core task of our frontend is to display recipes. Since the backend is the source of truth for recipe data, the frontend needs to ask the backend for it. This is where the Backend API Endpoints we discussed come into play.
 
 When you open `http://localhost:5000` in your browser, here's a simplified sequence of events involving the frontend:
 
 1.  Your browser requests `/` from the Flask server.
-2.  The Flask server responds by sending the `static/index.html` file ([Chapter 1: Flask Web Server](01_flask_web_server_.md)).
+2.  The Flask server responds by sending the `static/index.html` file 
 3.  Your browser starts reading `index.html`.
 4.  `index.html` contains links to `static/styles.css` and `static/app.js`. Your browser requests these files from the server.
 5.  The server sends `styles.css` and `app.js` (again, via the static file serving route from Chapter 1).
 6.  Your browser applies the styles from `styles.css` to the page structure defined in `index.html`.
 7.  Your browser starts executing the JavaScript code in `app.js`.
 8.  The JavaScript code in `app.js` initiates a request to one of the backend API endpoints, like `/api/recipes/search`, often including parameters for pagination or filters.
-9.  The backend receives this request, processes it (fetches data from the database, as we'll see in later chapters), and sends back the recipe data as a JSON response ([Chapter 2: Backend API Endpoints](02_backend_api_endpoints_.md)).
+9.  The backend receives this request, processes it (fetches data from the database, as we'll see in later chapters), and sends back the recipe data as a JSON response Chapter 2: Backend API Endpoints.
 10. The JavaScript code in `app.js` receives the JSON data from the backend.
 11. The JavaScript code takes this data and dynamically builds the HTML elements needed to display the recipe list (e.g., creates rows in a table).
 12. The JavaScript code updates the appropriate part of the `index.html` page in your browser to show the newly created HTML containing the recipes.
@@ -415,7 +415,7 @@ This diagram illustrates how the frontend code (`app.js`) running in the browser
 
 ## Conclusion
 
-In this chapter, we shifted our focus to the **Frontend User Interface**, the part of the application that runs in your browser and allows you to interact with the application. We learned that it's built using HTML for structure, CSS for styling, and JavaScript for interactivity. The key role of the JavaScript code is to communicate with the backend API endpoints (that we discussed in [Chapter 2: Backend API Endpoints](02_backend_api_endpoints_.md)) using `fetch` requests, receive the recipe data in JSON format, and dynamically update the HTML page to display that data to the user.
+In this chapter, we shifted our focus to the **Frontend User Interface**, the part of the application that runs in your browser and allows you to interact with the application. We learned that it's built using HTML for structure, CSS for styling, and JavaScript for interactivity. The key role of the JavaScript code is to communicate with the backend API endpoints (that we discussed in Chapter 2: Backend API Endpoints using `fetch` requests, receive the recipe data in JSON format, and dynamically update the HTML page to display that data to the user.
 
 Understanding the frontend helps us appreciate why the backend API endpoints are structured the way they are – they are designed to provide the data the frontend needs to function.
 
@@ -471,7 +471,7 @@ Based on the project details, our `recipes` table needs columns to hold the key 
 | `ingredients` | Text (JSON String)     | List of ingredients (stored as text)            |
 | `instructions`| Text (JSON String)     | Steps for instructions (stored as text)         |
 
-Notice that some columns like `nutrients`, `ingredients`, and `instructions` are listed as "Text (JSON String)". This is because the original data might contain lists or nested structures. For simplicity in this beginner project, we store these complex parts as single pieces of text that are formatted according to the **JSON** standard. When the backend retrieves this text from the database, it will need to convert it back into a usable Python list or dictionary ([Data Serialization/Deserialization](06_data_serialization_deserialization_.md)).
+Notice that some columns like `nutrients`, `ingredients`, and `instructions` are listed as "Text (JSON String)". This is because the original data might contain lists or nested structures. For simplicity in this beginner project, we store these complex parts as single pieces of text that are formatted according to the **JSON** standard. When the backend retrieves this text from the database, it will need to convert it back into a usable Python list or dictionary Data Serialization/Deserialization.
 
 ## How the Backend Talks to the Database
 
@@ -490,9 +490,8 @@ You don't need to become an SQL expert for this project, but understanding a few
 
 *   `SELECT * FROM recipes`: "Give me ALL columns (`*`) from the `recipes` table."
 *   `SELECT title, cuisine FROM recipes`: "Give me only the `title` and `cuisine` columns from the `recipes` table."
-*   `WHERE title LIKE ?`: "ONLY include rows where the `title` column is *like* a certain value (the `?` is a placeholder for the actual value we'll provide from Python, used to prevent security issues)." This is used for searching ([Search and Filtering Logic](07_search_and_filtering_logic_.md)).
-*   `LIMIT ? OFFSET ?`: "Give me only a specific number of results (`LIMIT`) starting after skipping a certain number of results (`OFFSET`)." This is key for [Pagination Logic](08_pagination_logic_.md).
-
+*   `WHERE title LIKE ?`: "ONLY include rows where the `title` column is *like* a certain value (the `?` is a placeholder for the actual value we'll provide from Python, used to prevent security issues).
+*   `LIMIT ? OFFSET ?`: "Give me only a specific number of results (`LIMIT`) starting after skipping a certain number of results (`OFFSET`)." 
 ## Interacting with SQLite in Python
 
 Python has a built-in module called `sqlite3` that makes it easy to work with SQLite databases.
