@@ -52,18 +52,12 @@ flowchart TD
 
 ## Chapters
 
-1. [Flask Web Server
-](01_flask_web_server_.md)
-2. [Backend API Endpoints
-](02_backend_api_endpoints_.md)
-3. [Frontend User Interface
-](03_frontend_user_interface_.md)
-4. [SQLite Recipe Database
-](04_sqlite_recipe_database_.md)
-5. [Database Access Layer
-](05_database_access_layer_.md)
-6. [Data Serialization/Deserialization
-](06_data_serialization_deserialization_.md)
+1. Flask Web Server
+2. Backend API Endpoints
+3. Frontend User Interface
+4. SQLite Recipe Database
+5. Database Access Layer
+6. Data Serialization/Deserialization
 
 
 # Chapter 1: Flask Web Server
@@ -102,7 +96,7 @@ Let's break down the core ideas behind creating a simple Flask server:
 
 # Chapter 2: Backend API Endpoints
 
-Welcome back! In [Chapter 1: Flask Web Server](01_flask_web_server_.md), we learned that our Flask application is a server that listens for requests from your browser. It's like the main office receiving mail or phone calls. We saw how it handles basic requests like `/` to send back the main `index.html` file.
+Welcome back! In Chapter 1: Flask Web Server, we learned that our Flask application is a server that listens for requests from your browser. It's like the main office receiving mail or phone calls. We saw how it handles basic requests like `/` to send back the main `index.html` file.
 
 But what about getting the actual *recipe data*? How does the frontend ask the backend for a list of recipes, or search for specific ones? This is where **Backend API Endpoints** come in.
 
@@ -342,11 +336,10 @@ In this chapter, we learned that Backend API Endpoints are specific URLs on our 
 
 Understanding these endpoints is crucial because they form the communication contract between our backend server and the frontend user interface. In the next chapter, we will switch our focus to the frontend and see how it uses these API endpoints to fetch and display the recipe data for the user.
 
-[Next Chapter: Frontend User Interface](03_frontend_user_interface_.md)
 
 # Chapter 3: Frontend User Interface
 
-Welcome back! In the previous chapters, we built the foundation of our backend application. In [Chapter 1: Flask Web Server](01_flask_web_server_.md), we learned how our Flask server listens for requests and serves files like `index.html`. Then, in [Chapter 2: Backend API Endpoints](02_backend_api_endpoints_.md), we saw how the backend provides specific "doors" (`/api/recipes`, `/api/recipes/search`) that other applications can use to get data, usually in JSON format.
+Welcome back! In the previous chapters, we built the foundation of our backend application. In [Chapter 1: Flask Web Server](01_flask_web_server_.md), we learned how our Flask server listens for requests and serves files like `index.html`. Then, in Chapter 2: Backend API Endpoints, we saw how the backend provides specific "doors" (`/api/recipes`, `/api/recipes/search`) that other applications can use to get data, usually in JSON format.
 
 But where does all this happen? How do *you*, the user, actually see the recipes, type in your search terms, and click buttons? This is the job of the **Frontend User Interface**.
 
@@ -428,11 +421,10 @@ Understanding the frontend helps us appreciate why the backend API endpoints are
 
 Now that we know how the server works and how the frontend talks to it, let's explore where the recipe data actually comes from and how it's stored: the database.
 
-[Next Chapter: SQLite Recipe Database](04_sqlite_recipe_database_.md)
 
 # Chapter 4: SQLite Recipe Database
 
-Welcome back to our Recipe API development journey! In the last couple of chapters, we saw that our [Flask Web Server](01_flask_web_server_.md) serves the static files for the frontend ([Frontend User Interface](03_frontend_user_interface_.md)) and that the backend provides [Backend API Endpoints](02_backend_api_endpoints_.md) that the frontend uses to ask for recipe data.
+Welcome back to our Recipe API development journey! In the last couple of chapters, we saw that our Flask Web Server serves the static files for the frontend and that the backend provides  that the frontend uses to ask for recipe data.
 
 But where does the backend *get* all this recipe data? We're talking about thousands of recipes! We can't just keep them all in Python variables that disappear when the server stops. We need a permanent place to store them, organized in a way that's easy for the backend to search and retrieve.
 
@@ -545,7 +537,7 @@ This function is called whenever an API endpoint needs to interact with the data
 
 ### Querying Data in an API Endpoint
 
-Now let's look at how an API endpoint function, like the simplified `get_all_recipes` from [Chapter 2: Backend API Endpoints](02_backend_api_endpoints_.md), uses this connection to get data:
+Now let's look at how an API endpoint function, like the simplified `get_all_recipes` from Chapter 2: Backend API Endpoints, uses this connection to get data:
 
 ```python
 # --- Snippet from app.py ---
@@ -590,7 +582,7 @@ def get_all_recipes():
 
 This shows the typical flow: get a connection, get a cursor, run the SQL command using `cursor.execute()`, get the data using `cursor.fetchall()`, and importantly, `conn.close()` the connection when you're finished with it.
 
-The `search_recipes` endpoint works similarly, but it builds a more complex SQL query string based on the search parameters from the request, using the `WHERE` clause and potentially other conditions ([Search and Filtering Logic](07_search_and_filtering_logic_.md)).
+The `search_recipes` endpoint works similarly, but it builds a more complex SQL query string based on the search parameters from the request, using the `WHERE` clause and potentially other conditions.
 
 ## The Database Interaction Flow
 
@@ -627,19 +619,17 @@ This diagram shows how the Python code in our API endpoint function acts as the 
 
 Where does the data in `recipes.db` come from in the first place? It doesn't appear magically!
 
-The project includes a separate script, `load_recipes_to_db.py`, specifically for this purpose. This script reads the original recipe data (likely from a large JSON file), connects to the SQLite database (creating the table if it doesn't exist), and then inserts each recipe into the `recipes` table. This script only needs to be run once to set up the database initially. You can learn more about this process in [Database Population Script](10_database_population_script_.md).
+The project includes a separate script, `load_recipes_to_db.py`, specifically for this purpose. This script reads the original recipe data (likely from a large JSON file), connects to the SQLite database (creating the table if it doesn't exist), and then inserts each recipe into the `recipes` table. This script only needs to be run once to set up the database initially.
 
 ## Conclusion
 
 In this chapter, we explored the heart of our application's data storage: the **SQLite Recipe Database**, housed in the simple `recipes.db` file. We learned that it organizes recipes into a structured table with columns and rows. We saw how our Python backend uses the built-in `sqlite3` module to connect to this database, execute basic SQL commands to ask for data, and retrieve the results, which are then processed and sent to the frontend via the API endpoints.
 
-Understanding the database and how our backend code interacts with it using `sqlite3` and SQL is fundamental. However, directly embedding database code in every API endpoint function can become repetitive and harder to manage as the application grows. In the next chapter, we'll introduce a layer specifically designed to handle all database interactions, making our API code cleaner and more organized: the [Database Access Layer](05_database_access_layer_.md).
-
-[Next Chapter: Database Access Layer](05_database_access_layer_.md)
+Understanding the database and how our backend code interacts with it using `sqlite3` and SQL is fundamental. However, directly embedding database code in every API endpoint function can become repetitive and harder to manage as the application grows. In the next chapter, we'll introduce a layer specifically designed to handle all database interactions, making our API code cleaner and more organized.
 
 # Chapter 5: Database Access Layer
 
-Welcome back to our recipe app journey! In [Chapter 4: SQLite Recipe Database](04_sqlite_recipe_database_.md), we learned about our `recipes.db` file and how we can use Python's built-in `sqlite3` module to connect to it and run SQL commands to get recipe data. We saw simple examples of how our API endpoints in `app.py` might use functions like `get_db_connection()`, `cursor.execute()`, and `fetchall()`.
+Welcome back to our recipe app journey! In Chapter 4: SQLite Recipe Database, we learned about our `recipes.db` file and how we can use Python's built-in `sqlite3` module to connect to it and run SQL commands to get recipe data. We saw simple examples of how our API endpoints in `app.py` might use functions like `get_db_connection()`, `cursor.execute()`, and `fetchall()`.
 
 Now, look back at the code for the `/api/recipes` and `/api/recipes/search` endpoints in `app.py`. You might notice something: they both contain very similar lines of code for connecting to the database, creating a cursor, executing a query, fetching results, and closing the connection.
 
@@ -876,17 +866,16 @@ Even in a simple project, thinking in terms of a DAL brings benefits:
 
 ## Conclusion
 
-In this chapter, we introduced the concept of the **Database Access Layer (DAL)**. We learned that it's a design pattern where you create a dedicated part of your code (often a set of functions or a separate module) whose sole responsibility is to interact with the database. This helps keep your API endpoint code clean and focused on handling web requests, while the DAL handles the details of connecting, querying, and retrieving data from the [SQLite Recipe Database](04_sqlite_recipe_database_.md).
+In this chapter, we introduced the concept of the **Database Access Layer (DAL)**. We learned that it's a design pattern where you create a dedicated part of your code (often a set of functions or a separate module) whose sole responsibility is to interact with the database. This helps keep your API endpoint code clean and focused on handling web requests, while the DAL handles the details of connecting, querying, and retrieving data from the SQLite Recipe Database.
 
 Although our project's `app.py` directly includes database interaction code within the API functions for simplicity, understanding the DAL concept is vital for building more maintainable applications. The functions currently handling database calls in `app.py` (like the parts of `get_all_recipes` and `search_recipes` that use `conn` and `cursor`) *are* effectively performing the role of the DAL, just not within a separate, dedicated module.
 
 Now that we understand how the backend talks to the database to get the raw data, let's look closer at the format of that data, especially the JSON strings stored in the database, and how we convert them into usable Python objects and back again.
 
-[Next Chapter: Data Serialization/Deserialization](06_data_serialization_deserialization_.md)
 
 # Chapter 6: Data Serialization/Deserialization
 
-Welcome back! In [Chapter 5: Database Access Layer](05_database_access_layer_.md), we saw how our backend code interacts with the [SQLite Recipe Database](04_sqlite_recipe_database_.md) (`recipes.db`) to fetch raw recipe data. We learned that the database stores information neatly in tables with columns and rows, and we use SQL queries to retrieve it.
+Welcome back! In Chapter 5: Database Access Layer, we saw how our backend code interacts with the SQLite Recipe Database(`recipes.db`) to fetch raw recipe data. We learned that the database stores information neatly in tables with columns and rows, and we use SQL queries to retrieve it.
 
 However, some recipe details aren't just simple pieces of text or numbers. Think about an **ingredients list** – it's a list of multiple items. Or **nutrition facts** – that's typically a collection of different values like calories, protein, fat, etc., which sounds like a dictionary or object.
 
@@ -922,7 +911,7 @@ Python has a built-in module called `json` that makes performing serialization a
 
 ## Serialization (Packing) in Our Project
 
-In our project, the `load_recipes_to_db.py` script (which we'll explore fully in [Chapter 10: Database Population Script](10_database_population_script_.md)) is responsible for initially reading recipe data (likely from a JSON file) and inserting it into the `recipes.db` database.
+In our project, the `load_recipes_to_db.py` script is responsible for initially reading recipe data (likely from a JSON file) and inserting it into the `recipes.db` database.
 
 When it reads a recipe, it encounters Python lists for ingredients and instructions, and a Python dictionary for nutrients. Before inserting these into the `TEXT` columns in the database, it uses `json.dumps()` to convert them into JSON strings.
 
@@ -956,9 +945,9 @@ So, when the recipe data sits in the `recipes.db` file, the `ingredients`, `inst
 
 ## Deserialization (Unpacking) in Our Project
 
-Now, let's look at the other side. When our backend API endpoints ([Backend API Endpoints](02_backend_api_endpoints_.md)) fetch data from the database using the methods described in [Chapter 4: SQLite Recipe Database](04_sqlite_recipe_database_.md) and [Chapter 5: Database Access Layer](05_database_access_layer_.md), they get these JSON strings back from the database.
+Now, let's look at the other side. When our backend API endpoints Backend API Endpoints fetch data from the database using the methods described in Chapter 4: SQLite Recipe Database and Chapter 5: Database Access Layer, they get these JSON strings back from the database.
 
-Before sending this data to the frontend ([Frontend User Interface](03_frontend_user_interface_.md)), which expects these to be actual lists and objects it can work with, the backend needs to convert the JSON strings back into Python lists and dictionaries. This is where `json.loads()` is used.
+Before sending this data to the frontend Frontend User Interface, which expects these to be actual lists and objects it can work with, the backend needs to convert the JSON strings back into Python lists and dictionaries. This is where `json.loads()` is used.
 
 This happens right after fetching the rows from the database and before sending the final `jsonify(result)` response.
 
