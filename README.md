@@ -77,7 +77,7 @@ Our project uses **Flask** to build this web server. Flask is a popular and begi
 
 ## Our First Goal: Serving the Main Page
 
-The most basic thing a web server needs to do is serve the main page of the website. In our project, when you go to `http://localhost:5000`, the server needs to send back the `index.html` file, which is the starting point for our frontend user interface ([Frontend User Interface](03_frontend_user_interface_.md)).
+The most basic thing a web server needs to do is serve the main page of the website. In our project, when you go to `http://localhost:5000`, the server needs to send back the `index.html` file, which is the starting point for our frontend user interface.
 
 How does Flask help us do that?
 
