@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "public": "static",
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/app.py"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/static/index.html"
+    }
+  ]
+}
